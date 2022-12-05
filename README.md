@@ -1,2 +1,2 @@
-# C-_Exercise
+# C# Exercise
 Study Fundamental of C#
