@@ -1,6 +1,31 @@
-﻿string name = "Tuan";
-Console.WriteLine("Hello," + name + " : " + name.Length);
-Console.WriteLine(string.Format("Hello, {0} : {1} - {2}" , name, name.Length, "sa"));
-Console.WriteLine($"Hello, {name} : {name.Length} - {name}");
-name = name + $" : {name.Length}";
-Console.WriteLine(name);
+﻿int[] arr = { 8, 12, 6, 2, 18 };
+bubbleSort(arr);
+printAll(arr);
+
+// Function
+void printAll(int[] arr)
+{
+    for (int i = 0; i < arr.Length; i++)
+        Console.Write(arr[i] + "\t");
+}
+
+void swap(ref int a, ref int b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+void bubbleSort(int[] arr)
+{
+    for (int i = 0; i < arr.Length - 1; i++)
+    {
+        for (int j = 0; j < arr.Length - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                swap(ref arr[j], ref arr[j + 1]);
+            }
+        }
+    }
+}
