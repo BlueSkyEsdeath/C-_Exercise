@@ -1,8 +1,18 @@
-﻿int[] arr = { 1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17 };
-heapSort(arr);
+﻿int []arr = new int [11];
+init(arr);
+mergeSort(arr, 0, arr.Length - 1);
 printAll(arr);
 
 // Function
+void init(int []arr)
+{
+    Random random = new Random ();
+    for (int i = 0; i < arr.Length; i++)
+    {
+        arr[i] = random.Next(1, 100);
+    }
+}
+
 void printAll(int[] arr)
 {
     for (int i = 0; i < arr.Length; i++)
@@ -70,3 +80,66 @@ void heapSort(int[] arr)
         heapify(arr, i, 0);
     }
 }
+
+void quickSort(int[] arr, int low, int high)
+{
+    if (low >= high)
+    return;
+    int pivot = arr[high];
+    int j = low - 1;
+    for (int i = low; i < high; i++)
+    {
+        if (pivot > arr[i])
+        {
+            swap (ref arr[i], ref arr[++j]);
+        }
+    }
+    swap (ref arr[j + 1], ref arr[high]);
+    quickSort(arr, low, j);
+    quickSort(arr, j + 2, high);
+}
+
+void mergeSort(int []arr, int low, int high)
+{
+    if (low >= high)
+        return;
+    int mid = (low + high) / 2;
+    mergeSort(arr, low, mid);
+    mergeSort(arr, mid + 1, high);
+    merge (arr, low, mid, high);
+}
+
+void merge(int []arr, int low, int mid, int high)
+{
+    int arr1 = mid - low + 1;
+    int arr2 = high - mid;
+    int []leftArray = new int [arr1];
+    int []rightArray = new int [arr2];
+    int i, j;
+    for (i = 0; i < arr1; i++)
+    {
+        leftArray[i] = arr[low + i];
+    }
+    for (j = 0; j < arr2; j++)
+        rightArray[j] = arr[mid + j + 1];
+    i = j = 0;
+    int k  = low;
+    while (i < arr1 && j < arr2)
+        {
+            if (leftArray[i] < rightArray[j])
+            {
+                swap(ref arr[k++], ref leftArray[i++]);
+            }
+            else
+            {
+                swap(ref arr[k++], ref rightArray[j++]);
+            }
+        }
+    while (i < arr1)
+    {
+        arr[k++] = leftArray[i++];
+    }
+    while (j < arr2)
+        arr[k++] = rightArray[j++];
+}
+ 
